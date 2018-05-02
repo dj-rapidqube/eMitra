@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE JposEntries PUBLIC "-//JavaPOS//DTD//EN"
+                             "com/bixolon/jpos/res/jcl.dtd">
+<JposEntries>
+<!--Saved by BIXOLON JavaPOS Configuration Utility 1.0 on 2/12/17 10:10 PM-->
+    
+    <JposEntry logicalName="SRP-330">
+        <creation factoryClass="com.bixolon.jpos.services.create.BixolonJposServiceInstanceFactory" serviceClass="com.bixolon.jpos.services.printers.StandardPrinterService"/>
+        <vendor name="BIXOLON" url="http://www.bixolon.com"/>
+        <jpos category="POSPrinter" version="1.13.0"/>
+        <product description="BIXOLON Standard POSPrinter Device Service" name="BIXOLON Service for JavaPOS(TM) Standard" url="http://www.bixolon.com"/>
+
+        <!--Other non JavaPOS required property (mostly vendor properties and bus specific properties i.e. RS232 )-->
+        <prop name="Wireless" type="String" value="false"/>
+        <prop name="MapMode" type="String" value="1"/>
+        <prop name="RXPF" type="String" value="true"/>
+        <prop name="CoverOpen" type="String" value="false"/>
+        <prop name="Log" type="String" value="false"/>
+        <prop name="CharSpace" type="String" value="0"/>
+        <prop name="CapRecEmptySensor" type="String" value="true"/>
+        <prop name="FontTypefaceList" type="String" value="FontA,FontB"/>
+        <prop name="VID" type="String" value="vid_1504"/>
+        <prop name="DeviceServiceVersion" type="String" value="1013000"/>
+        <prop name="RecBarCodeRotationList" type="String" value="0,180"/>
+        <prop name="CapRecPageMode" type="String" value="true"/>
+        <prop name="PNP_NAME" type="String" value="SRP-330"/>
+        <prop name="FeedCut" type="String" value="0"/>
+        <prop name="portName" type="String" value="COM1"/>
+        <prop name="OutputID" type="String" value="0"/>
+        <prop name="NAME" type="String" value="SRP-330"/>
+        <prop name="RecLineHeight" type="String" value="24"/>
+        <prop name="OutputBufferSize" type="String" value="4096"/>
+        <prop name="ErrorStation" type="String" value="2"/>
+        <prop name="PageModePrintDirection" type="String" value="1"/>
+        <prop name="RecBitmapRotationList" type="String" value="0,180"/>
+        <prop name="MonoDithering" type="String" value="0"/>
+        <prop name="CapRecDwide" type="String" value="true"/>
+        <prop name="ServiceDescription" type="String" value="SRP-330 Printer UnifiedPOS Compatible Service Driver, (C) BIXOLON"/>
+        <prop name="UsbDeviceName" type="String" value="\\?\USB#VID_1504&amp;PID_002A#00000001#{A5DCBF10-6530-11D2-901F-00C04FB951ED}"/>
+        <prop name="BluetoothBufSize" type="String" value="0"/>
+        <prop name="CapCharacterSet" type="String" value="998"/>
+        <prop name="PageModeArea" type="String" value="512,1662"/>
+        <prop name="CapRecColor" type="String" value="0"/>
+        <prop name="stopBits" type="String" value="1"/>
+        <prop name="dataBits" type="String" value="8"/>
+        <prop name="InternationalCharSet" type="String" value="0"/>
+        <prop name="PageModeVerticalPosition" type="String" value="0"/>
+        <prop name="CapRecMarkFeed" type="String" value="0"/>
+        <prop name="SupportIF" type="String" value="13"/>
+        <prop name="CartridgeNotify" type="String" value="0"/>
+        <prop name="PhysicalDeviceDescription" type="String" value="BIXOLON SRP-330 Thermal Printer"/>
+        <prop name="CapRecBitmap" type="String" value="true"/>
+        <prop name="Binary" type="String" value="false"/>
+        <prop name="CapRecDhigh" type="String" value="true"/>
+        <prop name="PID" type="String" value="pid_002a"/>
+        <prop name="RecLetterQuality" type="String" value="false"/>
+        <prop name="MapCharacterSet" type="String" value="true"/>
+        <prop name="EthernetBufSize" type="String" value="8192"/>
+        <prop name="LeftMargin" type="String" value="0"/>
+        <prop name="CheckHealthText" type="String" value=""/>
+        <prop name="CapTransaction" type="String" value="true"/>
+        <prop name="flowControl" type="String" value="Hardware"/>
+        <prop name="CapRecBarCode" type="String" value="true"/>
+        <prop name="parity" type="String" value="None"/>
+        <prop name="UsbBufSize" type="String" value="4096"/>
+        <prop name="RecLineWidth" type="String" value="512"/>
+        <prop name="DownloadableBitmapSize" type="String" value="12288"/>
+        <prop name="CapStatisticsReporting" type="String" value="false"/>
+        <prop name="RecLineSpacing" type="String" value="30"/>
+        <prop name="CapConcurrentJrnSlp" type="String" value="false"/>
+        <prop name="CapRec2Color" type="String" value="false"/>
+        <prop name="PageModeDescriptor" type="String" value="16"/>
+        <prop name="RunLengthEnc" type="String" value="0"/>
+        <prop name="RecLineChars" type="String" value="42"/>
+        <prop name="baudRate" type="String" value="115200"/>
+        <prop name="PageModeHorizontalPosition" type="String" value="0"/>
+        <prop name="socPort" type="String" value="9100"/>
+        <prop name="RecSidewaysMaxChars" type="String" value="0"/>
+        <prop name="PowerState" type="String" value="2000"/>
+        <prop name="CapRecItalic" type="String" value="false"/>
+        <prop name="AddLastLF" type="String" value="false"/>
+        <prop name="RecEmpty" type="String" value="false"/>
+        <prop name="deviceBus" type="String" value="USB"/>
+        <prop name="RecCurrentCartridge" type="String" value="0"/>
+        <prop name="CharacterSetList" type="String" value="437,1,850,860,863,865,1252,866,852,858,862,864,23,1253,1254,1257,27,1251,737,775,31,32,1255,34,35,855,857,928,39,1256,255,949,932,950,936"/>
+        <prop name="RecSidewaysMaxLines" type="String" value="0"/>
+        <prop name="CapCompareFirmwareVersion" type="String" value="false"/>
+        <prop name="CapRecCartridgeSensor" type="String" value="0"/>
+        <prop name="TransactionControl" type="String" value="12"/>
+        <prop name="SwapFontC" type="String" value="false"/>
+        <prop name="BMASIS" type="String" value="0"/>
+        <prop name="CapUpdateStatistics" type="String" value="false"/>
+        <prop name="MaxBitmapNumber" type="String" value="20"/>
+        <prop name="PageModeStation" type="String" value="0"/>
+        <prop name="FreezeEvents" type="String" value="false"/>
+        <prop name="RotateSpecial" type="String" value="1"/>
+        <prop name="SerialBufSize" type="String" value="8192"/>
+        <prop name="FlagWhenIdle" type="String" value="false"/>
+        <prop name="CapRecDwideDhigh" type="String" value="true"/>
+        <prop name="DeviceEnabled" type="String" value="false"/>
+        <prop name="PowerNotify" type="String" value="1"/>
+        <prop name="CapConcurrentJrnRec" type="String" value="false"/>
+        <prop name="Brightness" type="String" value="0"/>
+        <prop name="PrinterType" type="String" value="2"/>
+        <prop name="CDW_LINKED_NUMBER" type="String" value="10"/>
+        <prop name="AutoDisable" type="String" value="false"/>
+        <prop name="PagemodeControl" type="String" value="3"/>
+        <prop name="DataCount" type="String" value="0"/>
+        <prop name="CapPowerReporting" type="String" value="1"/>
+        <prop name="TransactionErrorResponse" type="String" value="11"/>
+        <prop name="AsyncMode" type="String" value="false"/>
+        <prop name="ErrorLevel" type="String" value="1"/>
+        <prop name="RecCartridgeState" type="String" value="0"/>
+        <prop name="ErrorString" type="String" value=""/>
+        <prop name="DataEventEnabled" type="String" value="false"/>
+        <prop name="Threshold" type="String" value="127"/>
+        <prop name="CapRecRotate180" type="String" value="true"/>
+        <prop name="CapMapCharacterSet" type="String" value="true"/>
+        <prop name="RecLinesToPaperCut" type="String" value="5"/>
+        <prop name="CapRecBold" type="String" value="true"/>
+        <prop name="PageModePrintArea" type="String" value="0,0,0,0"/>
+        <prop name="CapRecLeft90" type="String" value="false"/>
+        <prop name="CharacterSet" type="String" value="437"/>
+        <prop name="ControlDescription" type="String" value="POS Printer UnifiedPOS Compatible Control, (C) BIXOLON"/>
+        <prop name="CapCoverSensor" type="String" value="true"/>
+        <prop name="CapRecPresent" type="String" value="true"/>
+        <prop name="CapRecNearEndSensor" type="String" value="true"/>
+        <prop name="RecNearEnd" type="String" value="false"/>
+        <prop name="CapConcurrentRecSlp" type="String" value="false"/>
+        <prop name="CapRecRight90" type="String" value="false"/>
+        <prop name="CapRecPapercut" type="String" value="true"/>
+        <prop name="DeviceControlVersion" type="String" value="1013000"/>
+        <prop name="BitmapSplitCount" type="String" value="0"/>
+        <prop name="RecLineCharsList" type="String" value="42,56"/>
+        <prop name="CapUpdateFirmware" type="String" value="false"/>
+        <prop name="Claimed" type="String" value="false"/>
+        <prop name="CapRecUnderline" type="String" value="true"/>
+        <prop name="State" type="String" value="1"/>
+        <prop name="ipAddr" type="String" value=""/>
+        <prop name="CapRecStamp" type="String" value="false"/>
+</JposEntry>
+    
+</JposEntries>

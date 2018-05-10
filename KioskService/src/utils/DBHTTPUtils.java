@@ -34,11 +34,13 @@ public class DBHTTPUtils {
     @Value("${db.api.server.push.url}")
     private String dbApiServerPushURL;
 
+    
     private static CloseableHttpClient httpClient;
     private static final ObjectMapper objMapper = new ObjectMapper();
 
     @PostConstruct
     public void init() throws Exception {
+    	//System.out.println(dbDirectApiServerPushUrl);
         PoolingHttpClientConnectionManager connectionManager = new PoolingHttpClientConnectionManager();
         connectionManager.setMaxTotal(HTTP.MAX_OPEN_CONNECTIONS);
         connectionManager.setDefaultMaxPerRoute(HTTP.MAX_CONCURRENT_CONNECTION_PER_ROUTE);
@@ -55,6 +57,10 @@ public class DBHTTPUtils {
         if (!StringUtils.endsWith(dbApiServerPushURL, Constants.FORWARD_SLASH)) {
             dbApiServerPushURL += (Constants.FORWARD_SLASH);
         }
+        
+       /* if (!StringUtils.endsWith(dbDirectApiServerPushUrl, Constants.FORWARD_SLASH)) {
+        	dbDirectApiServerPushUrl += (Constants.FORWARD_SLASH);
+        }*/
     }
 
     // We are intentionally not handling the exceptions here. The Caller must handle the exceptions and act accordingly.

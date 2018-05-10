@@ -11,6 +11,7 @@ import org.json.JSONException;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Value;
 
 import UidotpAuthentication.AadharServices;
 import UidotpAuthentication.BhamashahServices;
@@ -21,16 +22,35 @@ import model.Login;
 @Service("bhamashahCardService")
 public class BhamashahCardServiceImpl implements BhamashahCardService {
 	
+	@Value("${CLIENTID_Uid_Production}")
+	private static  String CLIENTID_Uid_Production;
+	
+	@Value("${CLIENTID_EMITRA_ID_Production}")
+	private static  String CLIENTID_EMITRA_ID_Production;
+	
+	@Value("${URL_OTP_GENERATION}")
+	private static  String URL_OTP_GENERATION;
+	
+	@Value("${URL_OTP_AUTHENTICATION}")
+	private static  String URL_OTP_AUTHENTICATION;
+	
+	@Value("${URL_BHAMASHAH_GETDETAILS_PRODUCTION}")
+	private static  String URL_BHAMASHAH_GETDETAILS_PRODUCTION;
+	
+	@Value("${URL_BHAMASHAH_MOBACC_NO_UPDATE_PRODUCTION}")
+	private static  String URL_BHAMASHAH_MOBACC_NO_UPDATE_PRODUCTION;
+	
+	
 	@Autowired
 	BhamashahCardDao bhamashahCardDao;
-
-	private static final String CLIENTID_UID_PROD = "9063b7b2-3a8d-4efb-8422-0572fff44ab2"; // PROD
-	private static final String CLIENTID_EMITRA_ID_PROD = "d4c1624f-cc0b-40bf-af73-4779b5a9293f"; // PROD
+    
+	private static final String CLIENTID_UID_PROD = CLIENTID_Uid_Production; // PROD
+	private static final String CLIENTID_EMITRA_ID_PROD = CLIENTID_EMITRA_ID_Production; // PROD
 	
-	private static final String URL_OTP_GEN = "https://api.sewadwaar.rajasthan.gov.in/app/live/api/aua/otp/request?client_id="+CLIENTID_UID_PROD; // PROD
-	private static final String URL_OTP_AUTH = "https://api.sewadwaar.rajasthan.gov.in/app/live/api/aua/otp/auth/encr?client_id="+CLIENTID_UID_PROD; // PROD
-	private static final String URL_BHAMASHAH_GETDETAILS_PROD = "https://api.sewadwaar.rajasthan.gov.in/app/live/Bhamashah/Prod/Dtl/kiosk/Fetch/Plus/";	// PROD
-	private static final String URL_BHAMASHAH_MOBACC_NO_UPDATE_PROD = "https://api.sewadwaar.rajasthan.gov.in/app/live/Bhamashah/Prod/Action/Service/KioskDtlPush/";// PRO
+	private static final String URL_OTP_GEN = URL_OTP_GENERATION+CLIENTID_UID_PROD; // PROD
+	private static final String URL_OTP_AUTH = URL_OTP_AUTHENTICATION+CLIENTID_UID_PROD; // PROD
+	private static final String URL_BHAMASHAH_GETDETAILS_PROD = URL_BHAMASHAH_GETDETAILS_PRODUCTION;	// PROD
+	private static final String URL_BHAMASHAH_MOBACC_NO_UPDATE_PROD = URL_BHAMASHAH_MOBACC_NO_UPDATE_PRODUCTION;// PRO
 	
 	@SuppressWarnings("unchecked")
 	@Override

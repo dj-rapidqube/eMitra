@@ -20,6 +20,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Value;
 
 import UidotpAuthentication.AadharServices;
 import controller.DisabilityController;
@@ -29,15 +30,37 @@ import model.DisabilityCertificateInfo;
 @Service("disabilityService")
 public class DisabilityServiceImpl implements DisabilityService {
 
+	@Value("${CertificateServicedisabilityURL}")
+	private String CertificateServicedisabilityURL;
+	
+	@Value("${CLIENTID_Uid_Production}")
+	private static  String CLIENTID_Uid_Production;
+	
+	@Value("${URL_OTP_GENERATION}")
+	private static  String URL_OTP_GENERATION;
+	
+	@Value("${URL_OTP_AUTHENTICATION}")
+	private static  String URL_OTP_AUTHENTICATION;
+	
+	@Value("${LICENCEKEY_PROD}")
+	private static  String LICENCEKEY_PROD;
+	
+	@Value("${SUBAUA_PROD}")
+	private static  String SUBAUA_PROD;
+	
+	
+	
 	@Autowired
 	DisabilityDAO disabilityDAO;
 	static final Logger logger = Logger.getLogger(DisabilityServiceImpl.class);
 	private final String USER_AGENT = "Mozilla/5.0";
-	private static final String CLIENTID_UID = "9063b7b2-3a8d-4efb-8422-0572fff44ab2"; // PRODUCTION
-	private static final String SUBAUA = "STGDOIT028";
-    private static final String LICENCEKEY = "MCsgGevkwgSAL9BzBsoiPgPLlcfxoTx8IM8pwTks7WZwqzE0l7xWjuk"; // PROD
-	private static final String URL_OTP_GEN = "https://api.sewadwaar.rajasthan.gov.in/app/live/api/aua/otp/request?client_id="+CLIENTID_UID; // PRODUCTION
-	private static final String URL_OTP_AUTH = "https://api.sewadwaar.rajasthan.gov.in/app/live/api/aua/kyc/bio_otp/encr?client_id="+CLIENTID_UID; // PRODUCTION
+	private static final String CLIENTID_UID = CLIENTID_Uid_Production; // PRODUCTION
+	private static final String SUBAUA = SUBAUA_PROD;
+    private static final String LICENCEKEY =LICENCEKEY_PROD; // PROD
+	private static final String URL_OTP_GEN = URL_OTP_GENERATION+CLIENTID_UID; // PRODUCTION
+	private static final String URL_OTP_AUTH = URL_OTP_AUTHENTICATION+CLIENTID_UID; // PRODUCTION
+	
+	
 	
 	@Override
 	public Map<String, Object> uidOtpGeneration(String aadharId) {
@@ -86,7 +109,7 @@ public class DisabilityServiceImpl implements DisabilityService {
 		int responseCode = 0;
 		HashMap<String,String> map = null;
 		try {
-				String URL = "http://reportsemitraapp.rajasthan.gov.in/emitraReportsRepository/getDisabilityCertificateURL?sapNumber="+SAPID+"&aadhar="+AADHAAR;
+				String URL = CertificateServicedisabilityURL+AADHAAR;
 				//String URL = "http://reportsemitraapp.rajasthan.gov.in/emitraReportsRepository/getDisabilityCertificateURLWithEmitra?sapNumber="+SAPID+"&aadhar="+AADHAAR;
 				//String URL = "https://dsa.rajasthan.gov.in/GetDisabiiltyCertByAadhaarSapID";
 				URL obj = new URL(URL);

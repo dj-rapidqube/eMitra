@@ -11,6 +11,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -32,8 +33,19 @@ import webServicesRepository.utility.EncrptDesryptDataService;
 public class BhamashahCardController {
 
 	static final Logger logger = Logger.getLogger(BhamashahCardController.class);
-	private static final String SERVICEPROVIDERNAME = "Editing In Bhamashah Card";
+	
+/*	private static final String SERVICEPROVIDERNAME = "Editing In Bhamashah Card";
 	private static final String SERVICEPROVIDERID = "3025";
+	*/
+	
+
+	@Value("${serviceProviderName}")
+	private String serviceProviderName;	
+	@Value("${serviceProviderId}")
+	private String serviceProviderId;		
+	
+	
+	
 	@Autowired
 	BillService billService;
 	
@@ -42,15 +54,15 @@ public class BhamashahCardController {
 	
 	@RequestMapping(value = "/bhamashahCardHi" ,method = RequestMethod.POST)
 	public ModelAndView bonafideHi(HttpServletRequest request) {
-		request.setAttribute("serviceProviderName", SERVICEPROVIDERNAME);
-		request.setAttribute("serviceProviderID", SERVICEPROVIDERID);
+		request.setAttribute("serviceProviderName", serviceProviderName);
+		request.setAttribute("serviceProviderID", serviceProviderId);
 		return new ModelAndView("bhamashahCardHi");
 	}
 	
 	@RequestMapping(value = "/bhamashahCard" ,method = RequestMethod.POST)
 	public ModelAndView bonafide(HttpServletRequest request) {
-		request.setAttribute("serviceProviderName", SERVICEPROVIDERNAME);
-		request.setAttribute("serviceProviderID", SERVICEPROVIDERID);
+		request.setAttribute("serviceProviderName", serviceProviderName);
+		request.setAttribute("serviceProviderID", serviceProviderId);
 		return new ModelAndView("bhamashahCard");
 	}
 	
@@ -213,8 +225,8 @@ public class BhamashahCardController {
 		
 		request.setAttribute("transId", transId);
 		request.setAttribute("updateCount", resObj.get("updateCount"));
-		request.setAttribute("serviceProviderName", SERVICEPROVIDERNAME);
-		request.setAttribute("serviceProviderID", SERVICEPROVIDERID);
+		request.setAttribute("serviceProviderName", serviceProviderName);
+		request.setAttribute("serviceProviderID", serviceProviderId);
 		request.setAttribute("languageCode", languageCode);
 		
 		request.setAttribute("message", message);

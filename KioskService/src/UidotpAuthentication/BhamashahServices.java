@@ -24,6 +24,8 @@ import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+import org.springframework.beans.factory.annotation.Value;
+
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -40,7 +42,16 @@ import org.w3c.dom.Element;
 
 @SuppressWarnings("deprecation")
 public class BhamashahServices implements Runnable{
-
+	
+	@Value("${GetDisabiiltyCertByAadhaarSapIDUrl}")
+	private String GetDisabiiltyCertByAadhaarSapIDUrl;
+	
+	@Value("${getBonafiedAadharDetailsUrl}")
+	private String getBonafiedAadharDetailsUrl;
+	
+	@Value("${MemberDataForBhamashaUrl}")
+	private static String MemberDataForBhamashaUrl;
+	
 	public Thread mythread;
 	public JSONObject dataJSON = new JSONObject();
 	private String requestUrl = null;
@@ -174,7 +185,7 @@ public class BhamashahServices implements Runnable{
 		// TODO Auto-generated method stub
 		StringBuffer responseString = new StringBuffer();
 		
-		requestUrl = "https://dsa.rajasthan.gov.in/GetDisabiiltyCertByAadhaarSapID";
+		requestUrl = GetDisabiiltyCertByAadhaarSapIDUrl;
 		String PDFINBASE64 = "";
 		
 		try {
@@ -241,8 +252,7 @@ public class BhamashahServices implements Runnable{
 	@SuppressWarnings("unchecked")
 	public Map<String, Object> getBonafiedAadharDetails(String aadharId , String modeOfPage) {
 		// TODO Auto-generated method stub
-		String requestUrl = "https://apitest.sewadwaar.rajasthan.gov.in/app/live/Bhamashah/Staging/infoAadhar?"
-				+ "client_id=client_id=ef2802f9-fe48-474a-ad90-081d75863f74";
+		String requestUrl = getBonafiedAadharDetailsUrl;
 		System.out.println(String.valueOf(aadharId));
 		String docxml = getXmlForAadharInfo(String.valueOf(aadharId));
 		System.out.println(docxml);
@@ -765,8 +775,7 @@ public class BhamashahServices implements Runnable{
 	
 	@SuppressWarnings("unused")
 	public static void main(String[] args) {
-		String urlBhamashahGetDetails = "https://apitest.sewadwaar.rajasthan.gov.in/app/live/Bhamashah/Staging/action/kioskPlusDtl/Fetch/760581847244"
-				+ "?client_id=0d1c452f-5711-462b-8f58-bf5156ac3285";
+		String urlBhamashahGetDetails = MemberDataForBhamashaUrl;
 		BhamashahServices bhamashahServices = new BhamashahServices();
 		/*String bhamashahId = String.valueOf("9999-2TBH-00035");
 		String memberId = String.valueOf("21344");

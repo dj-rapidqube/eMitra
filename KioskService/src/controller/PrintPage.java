@@ -20,6 +20,7 @@ import javax.swing.RepaintManager;
 import javax.ws.rs.core.MediaType;
 
 import org.apache.http.entity.StringEntity;
+import org.springframework.beans.factory.annotation.Value;
 
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
@@ -40,7 +41,8 @@ public class PrintPage implements Printable {
     	
     }
  
-    
+    @Value("${clientUrl}")
+	private String clientUrl;
  
     public void doPrint() {
         PrinterJob printJob = PrinterJob.getPrinterJob();
@@ -116,8 +118,7 @@ public class PrintPage implements Printable {
 			StringEntity entity = null;
 			client.setFollowRedirects(true);
 			
-			WebResource resource = client
-					.resource("http://localhost:9001/ezeapi/cardpayment");
+			WebResource resource = client.resource(clientUrl);
 			ClientResponse responseFrom = resource.type(MediaType.APPLICATION_JSON).post(ClientResponse.class,
 					t1);
 			response = responseFrom.getEntity(String.class);
@@ -134,5 +135,3 @@ public class PrintPage implements Printable {
 		}
 	}
 }
-
-

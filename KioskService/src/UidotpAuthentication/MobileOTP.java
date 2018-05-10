@@ -21,6 +21,8 @@ import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
 import java.text.SimpleDateFormat;
 import java.util.Random;
+import org.springframework.beans.factory.annotation.Value;
+
 
 import org.apache.log4j.Logger;
 import org.json.simple.JSONObject;
@@ -29,6 +31,9 @@ import org.json.simple.JSONObject;
 public class MobileOTP {
     
     static Logger logger = Logger.getLogger(MobileOTP.class.getName());
+    
+    @Value("${sendsmsrequesturl}")
+    private static String sendsmsrequesturl;
     
     @SuppressWarnings("unchecked")
 	public JSONObject sendMessageOnMobile(String mobileNo) {
@@ -160,7 +165,7 @@ public class MobileOTP {
 	public static HttpURLConnection sendSMS(String mobilenumber, String msg) throws MalformedURLException, IOException {
         
         Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("10.68.250.41", Integer.parseInt("8080")));
-        URL surl = new URL("http://msdgweb.mgov.gov.in/esms/sendsmsrequest");
+        URL surl = new URL(sendsmsrequesturl);
         HttpURLConnection connection = null;
         connection = (HttpURLConnection) surl.openConnection(proxy);
         connection.setDoInput(true);

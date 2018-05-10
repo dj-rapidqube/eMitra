@@ -3,7 +3,6 @@ package Client;
 import java.security.SecureRandom;
 import java.security.cert.X509Certificate;
 
-
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
@@ -13,7 +12,7 @@ import javax.net.ssl.X509TrustManager;
 import javax.ws.rs.core.MediaType;
 
 import org.apache.http.entity.StringEntity;
-
+import org.springframework.beans.factory.annotation.Value;
 
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
@@ -26,8 +25,22 @@ import com.sun.jersey.core.util.MultivaluedMapImpl;
 
 public class ClientExecution {
 	public String response = null;
+	
+	@Value("${cardPaymentUrl}")
+	private String cardPaymentUrl;
+	
+	@Value("${mgetApplicationsStatusMobile}")
+	private String mgetApplicationsStatusMobile;
+	
+	
+	@Value("${getphedTransactionHistory}")
+	private String getphedTransactionHistory;
+	
 
 	public String postClient(String orderId, String amount, String loginUser) {
+		
+		
+	
 		
 		
 		  System.out.println("Check Order Id "+orderId+"Amount :: " +amount+" User Name : "+loginUser);
@@ -95,7 +108,7 @@ public class ClientExecution {
 					"";
 			
 			WebResource resource = client
-							.resource("http://localhost:9001/ezeapi/cardpayment");
+							.resource(cardPaymentUrl);
 			ClientResponse responseFrom = resource.type(MediaType.APPLICATION_JSON).post(ClientResponse.class,
 							t1);
 
@@ -153,8 +166,7 @@ public class ClientExecution {
 
 			StringEntity entity = null;
 			client.setFollowRedirects(true);
-			WebResource resource = client.resource(
-					"http://reportsemitraapp.rajasthan.gov.in/emitraReportsRepository/mgetApplicationsStatusMobile");
+			WebResource resource = client.resource(mgetApplicationsStatusMobile);
 			ClientResponse responseFrom = resource.type("application/x-www-form-urlencoded").post(ClientResponse.class,
 					entity);
 			response = responseFrom.getEntity(String.class);
@@ -214,8 +226,7 @@ public class ClientExecution {
 
 			StringEntity entity = null;
 			client.setFollowRedirects(true);
-			WebResource resource = client.resource(
-					"http://reportsemitraapp.rajasthan.gov.in/emitraReportsRepository/getPhedTransactionHistory");
+			WebResource resource = client.resource(getphedTransactionHistory);
 			ClientResponse responseFrom = resource.type("application/x-www-form-urlencoded").post(ClientResponse.class,
 					entity);
 			response = responseFrom.getEntity(String.class);

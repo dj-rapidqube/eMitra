@@ -35,15 +35,22 @@ import org.bouncycastle.crypto.InvalidCipherTextException;
 import org.json.XML;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.springframework.beans.factory.annotation.Value;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 @SuppressWarnings("deprecation")
 public class AadharServices {
-
-	private static final String SUBAUA = "STGDOIT028";
+	@Value("${SUBAUA_PROD}")
+	private static  String SUBAUA_PROD;
+	
+	@Value("${LICENCEKEY_AADHAR_PROD}")
+	private static  String LICENCEKEY_AADHAR_PROD;
+	
+	
+	private static final String SUBAUA = SUBAUA_PROD;
 //    private static final String LICENCEKEY = "MEb05gqt5du2fk3enCvMrd6wkP6nVrHa4YEX6kRNJG5rsbaozzwh3Q0"; // PRE-PRODUCTION
-    private static final String LICENCEKEY = "MF6rQo0E-mKDJolSKZtiirpopoXTjlxMg7ya93V6hMCZz60_9oT4lrk"; // PRODUCTION
+    private static final String LICENCEKEY = LICENCEKEY_AADHAR_PROD; // PRODUCTION
 //    private static final String MACADD = "74-27-EA-BE-57-0E"; // PRE-PRODUCTION OR PRODUCTION
     
 	public Map<String, Object> aadharOtpGeneration(String aadharId , String requestUrl) {

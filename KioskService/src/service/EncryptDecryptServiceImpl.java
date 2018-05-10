@@ -9,6 +9,7 @@ import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.beans.factory.annotation.Value;
 
 import dao.EncryptDecryptDAO;
 import model.Bill;
@@ -18,9 +19,10 @@ import webServicesRepository.utility.EncrptDesryptDataService;
 
 @Service("encryptDecryptService")
 public class EncryptDecryptServiceImpl implements EncryptDecryptService{
-	
+	@Value("${DecryptServiceURL}")
+	private String DecryptServiceURL;
 //	private final String decryptURL = "http://emitrauat.rajasthan.gov.in/webServicesRepositoryUat/emitraAESDecryption";
-	private final String decryptURL = "https://emitraapp.rajasthan.gov.in/webServicesRepository/emitraAESDecryption";
+	private final String decryptURL = DecryptServiceURL;
 //	private final String USER_AGENT = "Mozilla/5.0";
 	
 	@Autowired

@@ -9,6 +9,7 @@ import java.net.URL;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.beans.factory.annotation.Value;
 
 import model.Login;
 
@@ -19,6 +20,45 @@ public class EncrptDesryptDataService {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
+	@Value("${emitraAESEncryptionURL}")
+	private String emitraAESEncryptionURL;
+	
+	@Value ("${FetchDetailsEncryptedBySsoURL}")
+	private String FetchDetailsEncryptedBySsoURL;
+	
+	@Value ("${emitraAESDecryptionURL}")
+	private String emitraAESDecryptionURL;
+	
+	@Value ("${emitraMD5ChecksumURL}")
+	private String emitraMD5ChecksumURL;
+	
+	@Value ("${backtobackTransactionWithEncryptionAURL}")
+	private String backtobackTransactionWithEncryptionAURL;
+	
+	@Value ("${getFetchDetailsEncryptedBySsoURL}")
+	private String getFetchDetailsEncryptedBySsoURL;
+	
+	@Value ("${backendTransCancelByDepartmentWithEncryptionURL}")
+	private String backendTransCancelByDepartmentWithEncryptionURL;
+	
+	@Value ("${getTokenVerifyNewProcessByRequestIdWithEncryptionURL}")
+	private String getTokenVerifyNewProcessByRequestIdWithEncryptionURL;
+	
+	@Value ("${getKioskDetailsJSONURL}")
+	private String getKioskDetailsJSONURL;
+	
+	@Value ("${URL_OTP_GENERATION}")
+	private static String URL_OTP_GENERATION;
+	
+	
+	@Value ("${URL_OTP_AUTHENTICATION}")
+	private static String URL_OTP_AUTHENTICATION;
+	
+	@Value ("${CLIENTID_UID_ENCRYPT_DECRYPT}")
+	private static String CLIENTID_UID_ENCRYPT_DECRYPT;
+	
+	
+	
 	public JdbcTemplate getJdbcTemplate() {
 		return jdbcTemplate;
 	}
@@ -30,44 +70,42 @@ public class EncrptDesryptDataService {
 
 	// private final String encryptURL =
 	// "http://emitrauat.rajasthan.gov.in/webServicesRepositoryUat/emitraAESEncryption";
-	private final String encryptURL = "https://emitraapp.rajasthan.gov.in/webServicesRepository/emitraAESEncryption";
+	private final String encryptURL = emitraAESEncryptionURL;
 
 	// private final String billInfoURL =
 	// "http://emitrauat.rajasthan.gov.in/webServicesRepositoryUat/getFetchDetailsEncryptedBySso";
-	private final String billInfoURL = "https://emitraapp.rajasthan.gov.in/webServicesRepository/getFetchDetailsEncryptedBySso";
+	private final String billInfoURL = FetchDetailsEncryptedBySsoURL;
 
 	// encrypt data required URL below
 	// private final String decryptURL =
 	// "http://emitrauat.rajasthan.gov.in/webServicesRepositoryUat/emitraAESDecryption";
-	private final String decryptURL = "https://emitraapp.rajasthan.gov.in/webServicesRepository/emitraAESDecryption";
+	private final String decryptURL = emitraAESDecryptionURL;
 
-	private final String checkSumURL = "https://emitraapp.rajasthan.gov.in/webServicesRepository/emitraMD5Checksum";
+	private final String checkSumURL = emitraMD5ChecksumURL;
 
 	// private final String
 	// backToBackURL="https://emitrauat.rajasthan.gov.in/webServicesRepositoryUat/backtobackTransactionWithEncryptionA";
-	private final String backToBackURL = "https://emitraapp.rajasthan.gov.in/webServicesRepository/backtobackTransactionWithEncryptionA";
+	private final String backToBackURL = backtobackTransactionWithEncryptionAURL;
 
-	private final String discomdetailsURL = "https://emitraapp.rajasthan.gov.in/webServicesRepository/getFetchDetailsEncryptedBySso";
+	private final String discomdetailsURL = getFetchDetailsEncryptedBySsoURL;
 
-	private final String pheddetailsURL = "https://emitraapp.rajasthan.gov.in/webServicesRepository/getFetchDetailsEncryptedBySso";
+	private final String pheddetailsURL = getFetchDetailsEncryptedBySsoURL;
 
-	private final String cancelTransacationURL = " https://emitraapp.rajasthan.gov.in/webServicesRepository/backendTransCancelByDepartmentWithEncryption";
+	private final String cancelTransacationURL = backendTransCancelByDepartmentWithEncryptionURL;
 
-	private final String verifyURL = "https://emitraapp.rajasthan.gov.in/webServicesRepository/getTokenVerifyNewProcessByRequestIdWithEncryption";
+	private final String verifyURL = getTokenVerifyNewProcessByRequestIdWithEncryptionURL;
 	// private final String cancelTransacationURL =
 	// "http://emitrauat.rajasthan.gov.in/webservicesRepositoryUat/backendTransCancelByDepartmentWithEncryption";
 
 	// All URL for refund are as below
-	private final String SSOIDURL = "https://emitraapp.rajasthan.gov.in/webServicesRepository/getKioskDetailsJSON";
+	private final String SSOIDURL = getKioskDetailsJSONURL;
 
-	public static final String CLIENTID_UID = "MEmVkcpNLahCE-9skCRMK36S_ufQGPaCiNFAZ33o_ICd01JIE6IBLpU"; // "9063b7b2-3a8d-4efb-8422-0572fff44ab2";
+	public static final String CLIENTID_UID = CLIENTID_UID_ENCRYPT_DECRYPT; // "9063b7b2-3a8d-4efb-8422-0572fff44ab2";
 																											// // PROD
 
-	public static final String URL_OTP_GEN = "https://api.sewadwaar.rajasthan.gov.in/app/live/api/aua/otp/request?client_id="
-			+ CLIENTID_UID;
+	public static final String URL_OTP_GEN = URL_OTP_GENERATION + CLIENTID_UID;
 
-	public static final String URL_OTP_AUTH = "https://api.sewadwaar.rajasthan.gov.in/app/live/api/aua/otp/auth/encr?client_id="
-			+ CLIENTID_UID; // PROD
+	public static final String URL_OTP_AUTH = URL_OTP_AUTHENTICATION+ CLIENTID_UID; // PROD
 
 	// HTTP GET request
 	private String sendGetEncryptData(String param) throws Exception {

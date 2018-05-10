@@ -35,6 +35,7 @@ import org.json.JSONException;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -66,7 +67,8 @@ import webServicesRepository.utility.VedioConference;
 @Controller
 public class BillController {
 	static final Logger logger = Logger.getLogger(BillController.class);
-	private final String USER_AGENT = "Mozilla/5.0";
+	
+	/*private final String USER_AGENT = "Mozilla/5.0";
 	private static final String TRANSFORMATION = "AES/CBC/PKCS5Padding";
 	private static final String AES = "AES";
 	private static final String SHA256 = "SHA-256";
@@ -89,7 +91,49 @@ public class BillController {
 //digit secure
 	private static final String digitSecureEncryptionKey = "1AEED1A2FD4FE22A527A5AFA6EDEA";
 	private static final String digitSecureMerchantCode = "EMITRAPLUSDIGITSECURE";
-	private static final String digitSecureCheckSum="z[$#vdPb~:2h@8V";
+	private static final String digitSecureCheckSum="z[$#vdPb~:2h@8V";*/
+	
+
+	@Value("${userAgent}")
+	private String userAgent;	
+	@Value("${transformation}")
+	private String transformation;	
+	@Value("${aes}")
+	private String aes;	
+	@Value("${sha256}")
+	private String sha256;
+	@Value("${yesCardEncryptionKey}")
+	private String yesCardEncryptionKey;	
+	@Value("${noCardEncryptionKey}")
+	private String noCardEncryptionKey;	
+	@Value("${yesCardCheckSum}")
+	private String yesCardCheckSum;	
+	@Value("${noCardCheckSum}")
+	private String noCardCheckSum;	
+	@Value("${yesCardMerchantCode}")
+	private String yesCardMerchantCode;
+	@Value("${noCardMerchantCode}")
+	private String noCardMerchantCode;	
+	@Value("${digitSecureEncryptionKey}")
+	private String digitSecureEncryptionKey;	
+	@Value("${digitSecureMerchantCode}")
+	private String digitSecureMerchantCode;	
+	@Value("${digitSecureCheckSum}")
+	private String digitSecureCheckSum;
+	
+	@Value("${requestUrlJamabandiRecord}")
+	private String requestUrlJamabandiRecord;	
+	@Value("${requestUrlTehsilByDistrict}")
+	private String requestUrlTehsilByDistrict;	
+	@Value("${requestUrlVillageByTehsil}")
+	private String requestUrlVillageByTehsil;	
+	@Value("${requestUrlJamabandiRecordHi}")
+	private String requestUrlJamabandiRecordHi;	
+	@Value("${urlValidateEmitraPlusMachine}")
+	private String urlValidateEmitraPlusMachine;
+	
+	
+	
 	
 	
 	@Autowired
@@ -1462,7 +1506,7 @@ public class BillController {
 			connection.setRequestMethod("GET");
 
 			// add request header
-			connection.setRequestProperty("User-Agent", USER_AGENT);
+			connection.setRequestProperty("User-Agent", userAgent);
 
 			int responseCode = connection.getResponseCode();
 			if(responseCode!=200) {
@@ -1907,13 +1951,13 @@ public class BillController {
 			throw new IllegalArgumentException("To be encrypt string must not be null");
 		}
 		try {
-			MessageDigest md = MessageDigest.getInstance(SHA256);
+			MessageDigest md = MessageDigest.getInstance(sha256);
 			byte[] byteData = Arrays.copyOf(md.digest(key.getBytes("UTF-8")), 16);
 
-			SecretKeySpec secretKey = new SecretKeySpec(byteData, AES);
+			SecretKeySpec secretKey = new SecretKeySpec(byteData, aes);
 			IvParameterSpec ivParameterSpec = new IvParameterSpec(byteData);
 
-			Cipher cipher = Cipher.getInstance(TRANSFORMATION);
+			Cipher cipher = Cipher.getInstance(transformation);
 			cipher.init(ENCRYPT_MODE, secretKey, ivParameterSpec);
 			return Base64.encodeBase64String(cipher.doFinal(toBeEncryptString.getBytes("UTF-8")));
 		} catch (Exception ex) {
@@ -1927,13 +1971,13 @@ public class BillController {
 			throw new IllegalArgumentException("To be decrypt string must not be null");
 		}
 		try {
-			MessageDigest md = MessageDigest.getInstance(SHA256);
+			MessageDigest md = MessageDigest.getInstance(sha256);
 			byte[] byteData = Arrays.copyOf(md.digest(key.getBytes("UTF-8")), 16);
 
-			SecretKeySpec secretKey = new SecretKeySpec(byteData, AES);
+			SecretKeySpec secretKey = new SecretKeySpec(byteData, aes);
 			IvParameterSpec ivParameterSpec = new IvParameterSpec(byteData);
 
-			Cipher cipher = Cipher.getInstance(TRANSFORMATION);
+			Cipher cipher = Cipher.getInstance(transformation);
 			cipher.init(DECRYPT_MODE, secretKey, ivParameterSpec);
 			return new String(cipher.doFinal(Base64.decodeBase64(toBeDecryptString)));
 		} catch (Exception ex) {
@@ -2839,7 +2883,7 @@ public class BillController {
 		String SSOID = Login.SSOID;
 
 		logger.info("getMachineAuth, MachineId :" + SERIALNO + " SSOID :" + SSOID);
-        String URL = "https://emitraapp.rajasthan.gov.in/webServicesRepository/validateEmitraPlusMachine";
+        String urlValidateEmitraPlusMachine = "https://emitraapp.rajasthan.gov.in/webServicesRepository/validateEmitraPlusMachine";
 	//	String URL = "http://reportsemitraapp.rajasthan.gov.in/emitraReportsRepository/validateEmitraPlusMachine";		
 		
 		String result = "";
@@ -2861,7 +2905,7 @@ public class BillController {
             EncrptDesryptDataService service = new EncrptDesryptDataService();
     		
     		String urlParameters = "SERIALNO=" + SERIALNO + "&SSOID=" + SSOID;
-    		String response =  service.getPOSTResponse(methodName, urlParameters, "", URL);
+    		String response =  service.getPOSTResponse(methodName, urlParameters, "", urlValidateEmitraPlusMachine);
 
 		//	System.out.println("getMachineAuth, response :" + trans+" for SSOID : "+SSOID+" and machine id : "+mach1.getMachineId());
 			logger.info(methodName+", response :" + response+" for SSOID : "+SSOID+" and machine id : "+mach1.getMachineId());
